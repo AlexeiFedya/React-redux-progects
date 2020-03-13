@@ -6,14 +6,17 @@ import ItemStatus from "../item-status/item-status"
 import "./app.css"
 
 
-const App = ()=> {
+class App extends React.Component {
 
-  const todoData = [
-    {name: "Drink milk", important: false, id: 1},
-    {name: "Drink alcohol", important: true, id: 2},
-    {name: "Drink coffe", important: false, id: 3},
-  ]
+  state={
+      todoData: [
+        {name: "Drink milk", important: false, id: 1},
+        {name: "Drink alcohol", important: true, id: 2},
+        {name: "Drink coffe", important: false, id: 3},
+      ]
+  }
 
+  render (){
   return (
     <div  className="todo-app">
       <TodoHeader toDo={"3"} done={"1"}/>
@@ -21,9 +24,12 @@ const App = ()=> {
       <SearchPanel/>
       <ItemStatus/>
     </div>
-    <TodoList todos={todoData}/>
+    <TodoList
+      todos={this.state.todoData}
+      onDeleteds={(id)=> console.log("del", id)}/>
   </div>
   )
+  }
 }
 
 
