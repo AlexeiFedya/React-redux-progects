@@ -16,6 +16,25 @@ class App extends React.Component {
       ]
   }
 
+  deleteItem = (id) => {
+    this.setState(({todoData})=> {
+
+      const idx = todoData.findIndex((el)=> el.id === id)
+
+      //[a,,b,c,d,e]
+      //[a,b, d,e]
+
+      const newArray = [
+        ...todoData.slice(0, idx), 
+        ...todoData.slice(idx + 1)];
+
+      return {
+        todoData: newArray
+      };
+
+    })
+  }
+
   render (){
   return (
     <div  className="todo-app">
@@ -26,7 +45,7 @@ class App extends React.Component {
     </div>
     <TodoList
       todos={this.state.todoData}
-      onDeleteds={(id)=> console.log("del", id)}/>
+      onDeleteds={this.deleteItem}/>
   </div>
   )
   }
