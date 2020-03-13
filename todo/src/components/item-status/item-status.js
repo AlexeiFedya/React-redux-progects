@@ -1,16 +1,21 @@
 import React from "react";
 
-const ItemStatus = () => {
-    return (
-        <div className="btn-group">
-          <button type="button"
-                  className="btn btn-info">All</button>
-          <button type="button"
-                  className="btn btn-outline-secondary">Active</button>
-          <button type="button"
-                  className="btn btn-outline-secondary">Done</button>
-        </div>
-      );
+class ItemStatus extends React.Component {
+        render(){
+                return (
+                        <div className="btn-group">
+                                <button
+                                        type="button"
+                                        className="btn btn-info">All</button>
+                                <button 
+                                        type="button"
+                                        className="btn btn-outline-secondary">Active</button>
+                                <button
+                                        type="button"
+                                        className="btn btn-outline-secondary">Done</button>
+                        </div> 
+                )
+        }
 }
 
 export default ItemStatus;
