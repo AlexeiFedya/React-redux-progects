@@ -16,6 +16,9 @@ class ItemAddForm extends React.Component {
     onSubmit = (e)=>{
         e.preventDefault(); // когда этот евент будет обраб, то действие по умол не нужно ( перезагрузка )
         this.props.onItemAdd(this.state.name)
+        this.setState({
+            name:""
+        })
     }
 
     render(){
@@ -28,7 +31,8 @@ class ItemAddForm extends React.Component {
                     type="text"
                     placeholder =" add new todo item"
                     className="form-control"
-                    onChange={this.onNameChenge}></input>
+                    onChange={this.onNameChenge}
+                    value={this.state.name}></input>
                 <button
                 className = 'btn btn-outline-secondary'
                 >
