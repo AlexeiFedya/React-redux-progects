@@ -6,7 +6,8 @@ const SearchPanel = ()=> {
       <input
         type="text" 
         placeholder="search"
-        className="form-control search-input">
+        className="form-control search-input"
+        onChenge>
     </input>
     )
   }

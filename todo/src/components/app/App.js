@@ -4,9 +4,11 @@ import SearchPanel from '../search-panel/search-panel'
 import TodoList from '../todo-list/todo-list'
 import ItemStatus from "../item-status/item-status"
 import "./app.css"
-
+import ItemAddForm from "../item-add-form/item-add-fotm"
 
 class App extends React.Component {
+
+  maxId=100;
 
   state={
       todoData: [
@@ -35,6 +37,27 @@ class App extends React.Component {
     })
   }
 
+  onAddItem = (text) => { // add new item method
+    // generate id ? 
+    const newItem = {
+      name: text,
+      important: false,
+      id: this.maxId ++
+    }
+
+    // add element in array
+    this.setState(({todoData})=> {
+      const newArr = [ // данный массив состоит 
+        ...todoData, // из всех старых 
+        newItem // и нового айтема 
+      ];
+      
+      return {
+        todoData: newArr // return new Arr 
+      };
+    });
+  };
+
   render (){
   return (
     <div  className="todo-app">
@@ -46,6 +69,8 @@ class App extends React.Component {
     <TodoList
       todos={this.state.todoData}
       onDeleteds={this.deleteItem}/>
+
+      <ItemAddForm onItemAdd={this.onAddItem}/>
   </div>
   )
   }
