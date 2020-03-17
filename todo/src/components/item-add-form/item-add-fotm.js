@@ -3,17 +3,38 @@ import "./item-add-form.css"
 
 class ItemAddForm extends React.Component {
 
+    state = {
+        name: ""
+    }
 
+    onNameChenge = (e) => {
+        this.setState({
+            name: e.target.value
+        })
+    }
+
+    onSubmit = (e)=>{
+        e.preventDefault(); // когда этот евент будет обраб, то действие по умол не нужно ( перезагрузка )
+        this.props.onItemAdd(this.state.name)
+    }
 
     render(){
         return(
-            <div className="item-add-form">
+            <form
+                className="item-add-form d-flex"
+                onSubmit={this.onSubmit}>
+                
+                <input 
+                    type="text"
+                    placeholder =" add new todo item"
+                    className="form-control"
+                    onChange={this.onNameChenge}></input>
                 <button
                 className = 'btn btn-outline-secondary'
-                onClick={()=>this.props.onItemAdd("hell")}>
+                >
                     Add Item
                 </button>
-            </div>
+            </form>
         )
     }
 }
