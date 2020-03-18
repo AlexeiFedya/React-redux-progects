@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // no react
 
 const getResource = async (url) => {
   const res = await fetch(url);
