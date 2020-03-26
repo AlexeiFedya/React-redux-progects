@@ -1,67 +1,44 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+import withData from '../hoc-helpers/with-data';
+import SwapiService from '../../services/swapi-service';
 import './item-list.css';
-import SwapiService from '../../services/swapi-service'
-import Spinner from '../spinner/spinner';
-import ErrorIndicator from '../error-indicator/error-indicator'
 
-export default class ItemList extends React.Component {
+const ItemList = (props) => {
 
-    swapiService = new SwapiService()
+  const { data, onItemSelected, children: renderLabel } = props;
 
-    state = { 
-        peopleList: [],
-        loading: true,
-        error: false
-    }
-    
-    componentDidMount() {
-        this.swapiService
-            .getAllPeople()
-            .then((peopleList)=>{
-                this.setState({
-                    peopleList,
-                    loading: false
-                })
-            })
-            .catch(this.onError)
-    }
-
-    onError = (err) => {
-        this.setState({
-            error: true,
-            loading: false
-        })
-    }
-
-    renderItems(arr) {
-        return arr.map(({id, name}) => {
-            return (
-                <li className="list-group-item"
-                    key={id}
-                    onClick={()=>this.props.onItemSelected(id)}>
-                    {name}
-                </li>
-            )
-        })
-    }
-
-  render() {
-    
-    const {peopleList, loading, error} = this.state
-    const items = this.renderItems(peopleList)
-
-
-    const errorMesage = error ? <ErrorIndicator/> : null
-    const spinner = loading ? <Spinner/> : null
-    const content = !(loading || error) ? items : null
+  const items = data.map((item) => {
+    const { id } = item;
+    const label = renderLabel(item);
 
     return (
-    <ul className="item-list list-group">
-        {errorMesage}
-        {spinner}
-        {content}
-    </ul>
+      <li className="list-group-item"
+          key={id}
+          onClick={() => onItemSelected(id)}>
+        {label}
+      </li>
     );
-  }
-}
+  });
+
+  return (
+    <ul className="item-list list-group">
+      {items}
+    </ul>
+  );
+};
+
+ItemList.defaultProps = {
+  onItemSelected: () => {}
+};
+
+ItemList.propTypes = {
+  onItemSelected: PropTypes.func,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.func.isRequired
+};
+
+const { getAllPeople } = new SwapiService();
+
+export default withData(ItemList, getAllPeople);
