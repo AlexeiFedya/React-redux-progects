@@ -10,35 +10,50 @@ function App() {
 }
 
 const HooksStyleComponent = () => {
-    const [color, setColor] = useState('white')
-    const [fontSize, setFontSize] = useState(14)
+    const [value, setValue] = useState(0)
+    const [visible, setVisible] = useState(true)
 
-    const changeColorBlack = () => {
-      setColor((color) => {
-        if (color === 'white'){
-          return 'black'
-        } else {
-          return 'white'
-        }
-      })
+    if (visible) {
+      return (
+        <div>
+          <button
+            onClick={() => setValue((v)=> v+1)}>+ </button>
+            <button
+            onClick={() => setValue((v)=> v-1)}>-</button>
+          <button
+            onClick={()=> setVisible(false)}> hide </button>
+            {/* <HookCounter value={value}/> */}
+            <Notification/>
+        </div>
+      )
+    } else {
+      return(
+        <button
+          onClick={()=> setVisible(true)}>Show</button>
+      )
     }
+}
 
-    const changeSize = () => {
-      setFontSize((s)=> s + 2)
-    }
+const HookCounter = ({value}) => {
+  return <p>{value}</p>
+}
 
-    return(
-      <div style={{ 
-            padding: '10px',
-            backgroundColor: color,
-            fontSize: `${fontSize}px`
-             }}>
-        Hello World
+const Notification = () => {
+
+  const [visible, setVisible] = useState(true)
+
+  useEffect(()=> {
+    const timeout =setTimeout(()=> {
+      setVisible(false)
+    }, 2000)
+    return () => clearTimeout(timeout)
+  }, []);
   
-        <button onClick={changeColorBlack}>Dark or White</button>
-        <button onClick={changeSize}>+</button>
-      </div>
-    )
+  return (
+    <div>
+      { visible && <p>Hello </p>}
+    </div>
+  )
 }
 
 export default App;
