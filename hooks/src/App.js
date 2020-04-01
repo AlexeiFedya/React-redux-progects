@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 }
 
 const HooksStyleComponent = () => {
-    const [value, setValue] = useState(0)
+    const [value, setValue] = useState(1)
     const [visible, setVisible] = useState(true)
 
     if (visible) {
@@ -22,8 +22,7 @@ const HooksStyleComponent = () => {
             onClick={() => setValue((v)=> v-1)}>-</button>
           <button
             onClick={()=> setVisible(false)}> hide </button>
-            {/* <HookCounter value={value}/> */}
-            <Notification/>
+            <PlanetInfo id={value} />
         </div>
       )
     } else {
@@ -34,26 +33,40 @@ const HooksStyleComponent = () => {
     }
 }
 
-const HookCounter = ({value}) => {
-  return <p>{value}</p>
-}
-
-const Notification = () => {
-
-  const [visible, setVisible] = useState(true)
-
-  useEffect(()=> {
-    const timeout =setTimeout(()=> {
-      setVisible(false)
-    }, 2000)
-    return () => clearTimeout(timeout)
-  }, []);
-  
+const getPlanet = (id) => {
   return (
-    <div>
-      { visible && <p>Hello </p>}
-    </div>
+    fetch(`https://swapi.co/api/planets/${id}`)
+    .then(res => res.json())
+    .then(data => data)
   )
 }
+
+const useRequest = (request) => {
+  const [dataState, setDataState] = useState(null);
+
+  useEffect(()=>{
+    let cancelled = false;
+    request()
+    .then(data => !cancelled && setDataState(data))
+  return () => cancelled=true 
+  }, [request])
+  
+  return dataState
+}
+
+const usePlanetInfo = (id) => {
+  const request = () => getPlanet(id)
+  return useRequest(request)
+}
+
+const PlanetInfo = ({id})=> {
+
+  const data = usePlanetInfo(id)
+  
+  return (
+  <div>{id} - {data && data.name}</div>
+  ) 
+}
+
 
 export default App;
