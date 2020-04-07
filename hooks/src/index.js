@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Hooks from './Hooks';
+import Calculator from './LiftingState';
+
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Calculator/>
   </React.StrictMode>,
   document.getElementById('root')
 );

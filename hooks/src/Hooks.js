@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react';
 
 
-function App() {
+function Hooks() {
   return (
     <div >
       <HooksStyleComponent/>
@@ -94,4 +94,4 @@ const PlanetInfo = ({id})=> {
 }
 
 
-export default App;
+export default Hooks;
