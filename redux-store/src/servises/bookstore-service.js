@@ -3,12 +3,16 @@
     getBooks(){
         return [
             {   id:1, 
-                title: 'english papa',
-                author: 'Susan J'},
+                title: 'Kinder Joy Chocolates For Girls, 24 Pieces',
+                author: 'Ferrero',
+                price: 24,
+                coverImage: 'https://images-na.ssl-images-amazon.com/images/I/61xHZArjwUL._SL1101_.jpg'},
 
             {   id:2, 
-                title: 'english mama',
-                author: 'Joe Pi'}
+                title: 'Kinder Country Delicious Candy Bar',
+                author: 'Ferrero',
+                price: 42,
+                coverImage: 'https://images-na.ssl-images-amazon.com/images/I/61aVWpWHuYL._SL1024_.jpg'}
         ];
     }
 
