@@ -5,7 +5,6 @@ import {Route, Switch} from 'react-router-dom'
 import CartPage from '../pages/cart-page'
 import HomePage from '../pages/home-page'
 import StoreHeader from '../store-header/store-header';
-import ShopCartTable from '../shop-cart-table/shop-cart-table.js'
 
 
 import './app.css'
