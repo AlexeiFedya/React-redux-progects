@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BookList from '../book-list/book-list'
+import BookListContainer from '../book-list/book-list'
 import ShopCartTable from '../shop-cart-table/shop-cart-table.js'
 
 
@@ -8,7 +8,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <BookList/>
+            <BookListContainer/>
             <ShopCartTable/>
         </div>
     )
