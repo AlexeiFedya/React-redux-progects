@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import BookListItem from '../book-list-item/book-list-item'
 import withBookstoreService from '../hoc/with-bookstore-service'
-import { fetchBooks, booksAddedToCart } from '../../actions/actions'
+import { fetchBooks, bookAddedToCart } from '../../actions/actions'
 import compose from '../../utils/compose'
 import Loader from '../loader/loader'
 import ErrorIndicator from '../error-indicator/error-indicator'
@@ -80,7 +80,7 @@ const mapDispatchToProps = (dispatch, ownProps) =>  {
         const {bookstoreService} = ownProps
         return {
             fetchBooks: fetchBooks(bookstoreService, dispatch),
-            onAddedToCart: (id) => dispatch(booksAddedToCart(id))
+            onAddedToCart: (id) => dispatch(bookAddedToCart(id))
         }
     }
 
