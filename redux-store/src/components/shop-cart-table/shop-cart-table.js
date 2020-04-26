@@ -7,7 +7,7 @@ import {bookAddedToCart,
 
 import './shop-cart-table.css'
 
-const ShopCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => {
+const ShopCartTable = ({items,  onIncrease, onDecrease, onDelete}) => {
 
 
     const renderRow = (item, idx) => {
@@ -41,6 +41,9 @@ const ShopCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => {
         )
     }
 
+
+    
+
     return (
         <div className="shopping-cart-table">
             <h2>Your order</h2>
@@ -61,17 +64,18 @@ const ShopCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => {
             </table>
 
             <div className="total">
-                Total: ${total}
+                Total: ${items?.reduce((prev, cur) =>  prev+cur.total,0)}
             </div>
+            {/* Total: ${items?.reduce((prev, cur) =>  prev+cur.total,0)} */}
 
         </div>
     )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({shoppingCart}) => {
     return {
-        items: state.cartItems,
-        total: state.orderTotal
+        items: shoppingCart.cartItems,
+        // total: shoppingCart.orderTotal
     }
 }
 

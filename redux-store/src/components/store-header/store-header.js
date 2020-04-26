@@ -2,6 +2,7 @@ import React from 'react';
 import './store-header.css'
 import { Link } from 'react-router-dom'
 
+
 const StoreHeader = ({numItems, total}) => {
     return (
     <header className="shop-header row">
@@ -17,5 +18,7 @@ const StoreHeader = ({numItems, total}) => {
     </header>
     )
 }
+
+
 
 export default StoreHeader;
